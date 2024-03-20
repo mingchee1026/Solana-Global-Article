@@ -1,0 +1,21 @@
+[toolchain]
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+solana_global_article = "5YxhUbVP6iVwRY1KUGkQVB1N363SFcNq8r8xhAMnUJgS"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "/home/odmin/.config/solana/id.json"
+
+[test]
+startup_wait = 20000
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
