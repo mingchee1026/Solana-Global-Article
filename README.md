@@ -1,2 +1,2 @@
-# Web3 Functions Template  <!-- omit in toc -->
-Use this template to write, test and deploy Web3 Functions.
+# Solana Global Article
+Smart contract that aloows users to write a collective article.
