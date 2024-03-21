@@ -43,4 +43,32 @@ describe("solana-global-article", () => {
     const articleData = await program.account.article.fetch(deployerKeypair.publicKey);
     expect(articleData.content).to.eq("I am HRCH ");
   });
+
+  it("Should reset an article with empty", async () => {
+    const deployerKeypair = anchor.web3.Keypair.generate();
+    const personThatPays = program.provider.wallet;
+
+    await program.methods.initialize().accounts({
+      article: deployerKeypair.publicKey,
+      signer: personThatPays.publicKey,
+      systemProgram: anchor.web3.SystemProgram.programId,
+    })
+    .signers([deployerKeypair])
+    .rpc();
+
+    await program.methods.writeIntoArticle("I am HRCH").accounts({
+      article: deployerKeypair.publicKey,
+    })
+    .signers([])
+    .rpc();
+
+    const tx = await program.methods.resetArticle().accounts({
+      article: deployerKeypair.publicKey,
+    })
+    .signers([])
+    .rpc();
+
+    const articleData = await program.account.article.fetch(deployerKeypair.publicKey);
+    expect(articleData.content).to.eq("");
+  });
 });

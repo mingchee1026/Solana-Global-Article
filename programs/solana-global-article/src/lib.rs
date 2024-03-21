@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 // This is your program's public key and it will update
 // automatically when you build the project.
-declare_id!("5YxhUbVP6iVwRY1KUGkQVB1N363SFcNq8r8xhAMnUJgS");
+declare_id!("CePhpmcNQw2jhYrs4Vvp9JRiwg9VfU5CJ1oJWoY1nqfw");
 
 #[program]
 pub mod solana_global_article {
@@ -49,6 +49,14 @@ pub mod solana_global_article {
     
         Ok(())
     }
+
+    pub fn reset_article(ctx: Context<ResetArticle>) -> Result<()> {
+        let article = &mut ctx.accounts.article;
+        // reset the variables
+        article.content = ("").to_string();
+    
+        Ok(())
+    }
 }
 
 #[derive(Accounts)]
@@ -66,6 +74,13 @@ pub struct Initialize<'info> {
 
 #[derive(Accounts)]
 pub struct WriteIntoArticle<'info> {
+    //here goes the info that you want to modify like this
+    #[account(mut)]
+    pub article: Account<'info, Article>,
+}
+
+#[derive(Accounts)]
+pub struct ResetArticle<'info> {
     //here goes the info that you want to modify like this
     #[account(mut)]
     pub article: Account<'info, Article>,
