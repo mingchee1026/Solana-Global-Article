@@ -11,7 +11,7 @@ export default function Home() {
 
       <div className={styles.main}>
         <h1 className={styles.title}>
-          {/* My First Solana Program */}
+          My First Solana Program
         </h1>
       </div>
     </div>
